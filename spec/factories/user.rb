@@ -1,8 +1,8 @@
-# spec/factories/user.rb
+# spec/factories/users.rb
 FactoryBot.define do
-  factory :user do
-    nickname { FFaker::Lorem.word }
-    level { FFaker::Random.rand(1..99) }
+ factory :user do
+    nickname { FFaker::Name.first_name }
     kind { %w[knight wizard].sample }
-  end
+    level { FFaker::Random.rand(1..99) }
+ end
 end
