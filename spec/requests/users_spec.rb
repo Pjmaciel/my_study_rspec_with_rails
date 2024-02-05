@@ -28,8 +28,13 @@ RSpec.describe "Users", type: :request do
        expect(User.last).to have_attributes(user_attributes)
       end
     end
+
+    context "whe it has no valid parameters" do
+      it "does not create user" do
+        expect{
+          post users_path, params: { user: {kind: '', name: '', level: ''}}
+         }.to_not change(User, :count)
+      end
+    end
   end
-
-
-
 end
