@@ -4,13 +4,13 @@ class WeaponsController < ApplicationController
   end
 
   def create
-    @Weapon = Weapon.create(Weapon_params)
+    @weapon = Weapon.create(weapon_params)
     redirect_to weapons_path, notice: 'Weapon was created successfully'
   end
 
-  def destory
+  def destroy
     @weapon = Weapon.find(params[:id])
-    @weapon.destory
+    @weapon.destroy
     redirect_to weapons_path, notice: 'Weapon was successfully destroyed.'
   end
 
@@ -19,8 +19,7 @@ class WeaponsController < ApplicationController
   end
 
   private
-    def Weapon_params
-      param.require(:Weapon).permit(:name, :description, :power_base, :power_step, :level)
+    def weapon_params
+      params.require(:weapon).permit(:name, :description, :power_base, :power_step, :level)
     end
-
 end

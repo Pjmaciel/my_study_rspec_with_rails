@@ -14,7 +14,8 @@ RSpec.describe "Weapons", type: :request do
       get weapons_path
 
       weapons.each do |weapon|
-        expect(response.body).to include(weapon.name, weapon.current_power, weapon.power_base)
+        expect(response.body).to include(weapon.name, weapon.current_power.to_s, weapon.power_base.to_s ,weapon.description)
+        expect(response.body).to include("href=\"#{weapon.description}\"")
       end
     end
 
