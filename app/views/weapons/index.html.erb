@@ -1,6 +1,13 @@
-<% @weapons.each do |weapon| %>
-  <p><%= weapon.title %></p>
-  <p><%= weapon.current_power %></p>
-  <p><%= weapon.power_base %></p>
-  <%= link_to "Detalhes", weapon.description %>
-<% end %>
+<!-- app/views/weapons/index.html.erb -->
+<h1>Lista de Armas</h1>
+
+<ul>
+  <% @weapons.each do |weapon| %>
+    <li>
+      <p><strong>Nome:</strong> <%= weapon.name %></p>
+      <p><strong>Current Power:</strong> <%= weapon.current_power %></p>
+      <p><strong>Título:</strong> <%= weapon.title %></p>
+      <p><%= link_to "Detalhes", weapon_path(weapon) %></p>
+    </li>
+  <% end %>
+</ul>
