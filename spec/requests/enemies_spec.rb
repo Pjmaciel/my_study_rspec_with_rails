@@ -37,4 +37,19 @@ RSpec.describe "Enemies", type: :request do
       end
     end
   end
+
+  describe "DELETE /enemies" do
+    context "when the enemy exists" do
+      it "returns status code 200"
+      it "destroy the record"
+    end
+
+    context "when the enemy does not exist" do
+      it "returns status code 404"
+      it "returns a not found message"
+    end
+    
+  end
+  
+
 end
