@@ -16,7 +16,14 @@ RSpec.describe "Enemies", type: :request do
 
         expect(enemy.reload).to have_attributes(enemy_attributes)  
       end
-      it 'returns the enemy updates'
+      it 'returns the enemy updates'do
+        enemy = create(:enemy)
+        enemy_attributes = attributes_for(:enemy)
+        put "/enemies/#{enemy.id}", params: enemy_attributes
+
+        json_response = JSON.parse(response.body)
+        expect(enemy.reload).to have_attributes(json_response.except('created_at' , 'updated_at')  )  
+      end
     end
   
     context "whe the enemy does not exist" do
