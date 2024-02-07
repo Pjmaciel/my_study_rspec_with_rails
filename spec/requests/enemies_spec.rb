@@ -31,7 +31,10 @@ RSpec.describe "Enemies", type: :request do
         put "/enemies/0", params: attributes_for(:enemy)
         expect(response).to have_http_status(404) 
       end
-      it 'returns a not found message'
+      it 'returns a not found message' do
+        put "/enemies/0", params: attributes_for(:enemy)
+        expect(response.body).to match(/Couldn't find Enemy with 'id'=#{0}/) 
+      end
     end
   end
 end
