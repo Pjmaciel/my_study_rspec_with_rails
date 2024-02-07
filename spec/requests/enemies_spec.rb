@@ -49,12 +49,15 @@ RSpec.describe "Enemies", type: :request do
       it "destroy the record" do
         enemy = create(:enemy)
         delete "/enemies/#{enemy.id}"
-        except {enemy.reload}.to raise_erro ActiveRecord::RecordNotFound
+        expect{enemy.reload}.to raise_error ActiveRecord::RecordNotFound
       end
     end
 
     context "when the enemy does not exist" do
-      it "returns status code 404"
+      it "returns status code 404" do
+        delete "/enemies/0"
+        expect(response).to have_http_status(404)
+      end
       it "returns a not found message"
     end
     
