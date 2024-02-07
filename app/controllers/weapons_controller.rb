@@ -5,7 +5,12 @@ class WeaponsController < ApplicationController
 
   def show
     @weapon = Weapon.find(params[:id])
+    respond_to do |format|
+      format.html # Renderiza o template show.html.erb
+      format.json { render json: @weapon } # Responde com JSON
+    end
   end
+
 
   def create
     @weapon = Weapon.create(weapon_params)

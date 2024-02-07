@@ -41,5 +41,26 @@ RSpec.describe "Weapons", type: :request do
     end
   end
 
-  
+  describe "SHOW /weapon/:id" do
+    it "Show details of weapon by Id" do
+        weapon = create(:weapon)
+        get weapon_path(weapon) # Certifique-se de passar o objeto Weapon, não o ID
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(weapon.name, weapon.description, weapon.power_base.to_s, weapon.power_step.to_s, weapon.level.to_s)
+      end
+  end 
+
+  describe "DESTROY /weapon/:id" do
+    it "Delete the weapon by id" do
+      weapon = create(:weapon)
+      expect {
+        delete weapon_path(weapon)
+      }.to change(Weapon, :count).by(-1)
+      expect(response).to redirect_to(weapons_path)
+      follow_redirect!
+      expect(response.body).to_not include(weapon.name)
+    end
+  end
+
+
 end
