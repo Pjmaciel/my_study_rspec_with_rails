@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Enemies", type: :request do
+
+  #index
+
+  #create
+
+  #show
+
+  # Edit
   describe "PUT /enemies" do
     context 'when the enemy exists' do
       let(:enemy) { create(:enemy)}
@@ -33,7 +41,7 @@ RSpec.describe "Enemies", type: :request do
       end
     end
   end
-
+  # Destroy
   describe "DELETE /enemies" do
     context "when the enemy exists" do
       let(:enemy) { create(:enemy) }

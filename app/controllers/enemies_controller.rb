@@ -1,4 +1,22 @@
 class EnemiesController < ApplicationController
+
+  def index
+    @enemies = Enemy.all
+  end
+
+  def show
+    @enemy = Enemy.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json {render json: @enemy}
+    end
+  end
+
+  def create
+    @enemy = Enemy.create(enemy_params) 
+    redirect_to enemies_path, notice: "Enemy was created successfully"
+  end
+
   def update
     if @enemy.update(enemy_params)
       render json: @enemy, status: :ok
@@ -21,7 +39,7 @@ class EnemiesController < ApplicationController
 
   def set_enemy
     @enemy = Enemy.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
+    rescue ActiveRecord::RecordNotFound => e
     render json: { message: e.message }, status: :not_found
   end
 
