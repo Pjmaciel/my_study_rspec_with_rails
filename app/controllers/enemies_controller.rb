@@ -1,38 +1,28 @@
 class EnemiesController < ApplicationController
-
   def index
     @enemies = Enemy.all
-  end
-
-  def show
-    @enemy = Enemy.find(params[:id])
     respond_to do |format|
       format.html
-      format.json {render json: @enemy}
+      format.json { render json: @enemies }
     end
   end
 
   def create
-    @enemy = Enemy.create(enemy_params) 
-    redirect_to enemies_path, notice: "Enemy was created successfully"
+    @enemy = Enemy.create(enemy_params)
+    redirect_to enemies_path, notice: 'Enemy was creates successfully'    
   end
-
-  def update
-    if @enemy.update(enemy_params)
-      render json: @enemy, status: :ok
-    else
-      render json: { erros: @enemy.errors }, status: :unprocessable_entity
+  
+  
+  def show
+    @enemy = Enemy.find(params[:id])
+    respond_to do |format|
+      format.html # Seu arquivo show.html.erb será renderizado automaticamente
+      format.json { render json: @enemy }
     end
   end
 
-  def destroy
-    @enemy.destroy
-    head 204
-  end
-
-  before_action :set_enemy
-
   private
+
   def enemy_params
     params.permit(:name, :power_base, :power_step,:level, :kind)
   end
@@ -41,6 +31,5 @@ class EnemiesController < ApplicationController
     @enemy = Enemy.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
     render json: { message: e.message }, status: :not_found
-  end
 
 end
