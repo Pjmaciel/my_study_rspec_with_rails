@@ -40,7 +40,10 @@ RSpec.describe "Enemies", type: :request do
       let(:enemy) { create(:enemy)}
       let(:enemy_attributes) { attributes_for(:enemy)}
 
-      before(:each) { put "/enemies/#{enemy.id}", params: enemy_attributes}
+      before(:each) do
+          put "/enemies/#{enemy.id}", params: { enemy: enemy_attributes }.to_json, headers: { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+      end
+
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
