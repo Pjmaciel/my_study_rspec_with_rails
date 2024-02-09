@@ -1,0 +1,13 @@
+<h1> Lista de Inimigos</h1>
+
+<ul>
+  <% @enemies.each do |enemy| %>
+    <li>
+      <p><strong>Nome:</strong> <%= enemy.name %></p>
+      <p><strong>Kind:</strong> <%= enemy.kind %></p>
+      <p><strong>Level:</strong> <%= enemy.level %></p> <!-- Correção aqui -->
+      <p><strong>Power base:</strong> <%= enemy.power_base %></p>
+      <p><strong>Power step:</strong> <%= enemy.power_step %></p>
+    </li>
+  <% end %>
+</ul>
