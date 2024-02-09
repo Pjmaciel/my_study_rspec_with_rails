@@ -35,6 +35,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-json_matchers'  
 
 end
 

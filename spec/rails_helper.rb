@@ -64,4 +64,5 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include Requests::JsonHelpers, type: :requests
+  config.include RSpec::JsonMatchers
 end
