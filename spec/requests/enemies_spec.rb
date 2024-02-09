@@ -1,6 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe "Enemies", type: :request do
+  #index
+  describe "GET /enemies" do
+    it "returns http success status" do
+      get enemies_path
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  #create
+  describe "POST /enemies" do
+    context "when it has valid parameters" do
+      let(:valid_attributes) { attributes_for(:enemy) }
+
+      it "creates a new enemy" do
+        expect {
+          post enemies_path, params: valid_attributes.to_json, headers: { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+        }.to change(Enemy, :count).by(1)
+
+        expect(response).to have_http_status(:created)
+      end
+    end
+  end
+
+  #show
+  describe "SHOW /enemy/:id" do
+    it "Show details of enemy by Id" do
+        enemy = create(:enemy)
+        get enemy_path(enemy) 
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(enemy.name, enemy.power_base.to_s, enemy.power_step.to_s, enemy.level.to_s)
+      end
+  end 
+  
+  # Edit
   describe "PUT /enemies" do
     context 'when the enemy exists' do
       let(:enemy) { create(:enemy)}
@@ -33,7 +67,8 @@ RSpec.describe "Enemies", type: :request do
       end
     end
   end
-
+  
+  # Destroy
   describe "DELETE /enemies" do
     context "when the enemy exists" do
       let(:enemy) { create(:enemy) }
@@ -57,7 +92,7 @@ RSpec.describe "Enemies", type: :request do
         expect(response.body).to match(/Couldn't find Enemy with 'id'=#{0}/) 
       end
     end
-    
   end
-  
+
+
 end
