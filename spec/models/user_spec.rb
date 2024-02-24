@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
    end
 
   it "returns the correct hero title" do
-    nickname = "pjma"
+    nickname = "leandro"
     kind = %w[knight wizard].sample
     level = FFaker::Random.rand(1..99)
 
